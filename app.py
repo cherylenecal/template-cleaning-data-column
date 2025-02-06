@@ -81,7 +81,7 @@ if uploaded_file is not None:
     
     # Process data
     st.write("Processing data...")
-    transformed_data = move_to_template(raw_data)
+    transformed_data = move_to_template(df)
     
     # Show a preview of the transformed data
     st.write("Transformed Data Preview:")
