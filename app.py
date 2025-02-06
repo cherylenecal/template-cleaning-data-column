@@ -4,7 +4,7 @@ from io import BytesIO
 
 # Function to filter data
 def filter_data(df):
-    df = df[df['ClaimStatus'] == 'R']
+    df = df[df['Claim Status'] == 'R']
     return df
 
 # Function to handle duplicates
