@@ -30,7 +30,9 @@ def move_to_template(df):
         new_df[col] = pd.to_datetime(new_df[col], errors='coerce')
         if new_df[col].isnull().any():
             st.warning(f"Invalid date values detected in column '{col}'. Coerced to NaT.")
-
+            
+    if new_df['Product Type'] == "IP" and new_df['Room Option'] == "":
+        new_df['Room Option'] == "Unknown"
     # Step 4: Transform to the new template
     df_transformed = pd.DataFrame({
         "No": range(1, len(new_df) + 1),
