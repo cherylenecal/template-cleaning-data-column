@@ -60,6 +60,7 @@ def move_to_template(df):
         "Date": new_df["Date"],
         "Tahun": new_df["Date"].dt.year,
         "Bulan": new_df["Date"].dt.month,
+        "Sum of Claim": new_df["Claim Paid Note Amount"],
         "Sum of Billed": new_df["Billed"],
         "Sum of Accepted": new_df["Accepted"],
         "Sum of Excess Coy": new_df["Excess Coy"],
