@@ -31,7 +31,7 @@ def move_to_template(df):
         if new_df[col].isnull().any():
             st.warning(f"Invalid date values detected in column '{col}'. Coerced to NaT.")
             
-    new_df.loc[(new_df['Product Type'] == "IP") & (new_df['Room Option'] == ""), 'Room Option'] = "Unknown"
+    new_df.loc[(new_df['Product Type'] == "IP") & (new_df['Room Option'].isna()), 'Room Option'] = "Unknown"
     
     # Step 4: Transform to the new template
     df_transformed = pd.DataFrame({
