@@ -77,7 +77,7 @@ st.title("Claim Data Raw to Template")
 # File uploader
 uploaded_file = st.file_uploader("Upload your CSV file", type=["csv", "xlsx"])
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
+    df = pd.read_csv(uploaded_file, encoding='unicode_escape')
     
     # Process data
     st.write("Processing data...")
