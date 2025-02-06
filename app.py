@@ -9,11 +9,11 @@ def filter_data(df):
 
 # Function to handle duplicates
 def keep_last_duplicate(df):
-    duplicate_claims = df[df.duplicated(subset='ClaimNo', keep=False)]
+    duplicate_claims = df[df.duplicated(subset='Claim No', keep=False)]
     if not duplicate_claims.empty:
         st.write("Duplicated ClaimNo values:")
         st.write(duplicate_claims[['Claim No']].drop_duplicates())
-    df = df.drop_duplicates(subset='ClaimNo', keep='last')
+    df = df.drop_duplicates(subset='Claim No', keep='last')
     return df
 
 # Main processing function
@@ -25,7 +25,7 @@ def move_to_template(df):
     new_df = keep_last_duplicate(new_df)
 
     # Step 3: Convert date columns to datetime
-    date_columns = ["TreatmentStart", "TreatmentFinish", "Date"]
+    date_columns = ["Treatment Start", "Treatment Finish", "Date"]
     for col in date_columns:
         new_df[col] = pd.to_datetime(new_df[col], errors='coerce')
         if new_df[col].isnull().any():
