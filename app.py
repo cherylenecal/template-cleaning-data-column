@@ -31,7 +31,12 @@ def move_to_template(df):
         if new_df[col].isnull().any():
             st.warning(f"Invalid date values detected in column '{col}'. Coerced to NaT.")
             
-    new_df.loc[(new_df['Product Type'] == "IP") & (new_df['Room Option'] == None), 'Room Option'] = "Unknown"
+    # Ubah nilai kosong atau hanya berisi spasi menjadi NaN
+    new_df['Room Option'] = new_df['Room Option'].replace(["", " "], None)
+    
+    # Gantilah NaN dengan "Unknown" **hanya jika Product Type adalah "IP"**
+    new_df.loc[(new_df['Product Type'] == "IP") & (new_df['Room Option'].isna()), 'Room Option'] = "Unknown"
+
     
     # Step 4: Transform to the new template
     df_transformed = pd.DataFrame({
