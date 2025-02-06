@@ -75,9 +75,13 @@ def save_to_excel(df, filename):
 st.title("Claim Data Raw to Template")
 
 # File uploader
-uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
-if uploaded_file:
-    raw_data = pd.read_csv(uploaded_file)
+uploaded_file = st.file_uploader("Upload your CSV file", type=["csv", "xlsx"])
+if uploaded_file is not None:
+    try:
+        if uploaded_file.name.endswith(".csv"):
+            df = pd.read_csv(uploaded_file)
+        else:  # untuk file Excel
+            df = pd.read_excel(uploaded_file)
     
     # Process data
     st.write("Processing data...")
