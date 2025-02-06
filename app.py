@@ -12,7 +12,7 @@ def keep_last_duplicate(df):
     duplicate_claims = df[df.duplicated(subset='ClaimNo', keep=False)]
     if not duplicate_claims.empty:
         st.write("Duplicated ClaimNo values:")
-        st.write(duplicate_claims[['ClaimNo']].drop_duplicates())
+        st.write(duplicate_claims[['Claim No']].drop_duplicates())
     df = df.drop_duplicates(subset='ClaimNo', keep='last')
     return df
 
