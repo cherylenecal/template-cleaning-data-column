@@ -34,30 +34,30 @@ def move_to_template(df):
     # Step 4: Transform to the new template
     df_transformed = pd.DataFrame({
         "No": range(1, len(new_df) + 1),
-        "Policy No": new_df["PolicyNo"],
-        "Client Name": new_df["ClientName"],
-        "Claim No": new_df["ClaimNo"],
-        "Member No": new_df["MemberNo"],
-        "Emp ID": new_df["EmpID"],
-        "Emp Name": new_df["EmpName"],
-        "Patient Name": new_df["PatientName"],
+        "Policy No": new_df["Policy No"],
+        "Client Name": new_df["Client Name"],
+        "Claim No": new_df["Claim No"],
+        "Member No": new_df["Member No"],
+        "Emp ID": new_df["Emp ID"],
+        "Emp Name": new_df["Emp Name"],
+        "Patient Name": new_df["Patient Name"],
         "Membership": new_df["Membership"],
-        "Product Type": new_df["ProductType"],
-        "Claim Type": new_df["ClaimType"],
-        "Room Option": new_df["RoomOption"],
+        "Product Type": new_df["Product Type"],
+        "Claim Type": new_df["Claim Type"],
+        "Room Option": new_df["Room Option"],
         "Area": new_df["Area"],
-        "Diagnosis": new_df["PrimaryDiagnosis"],
-        "Treatment Place": new_df["TreatmentPlace"],
-        "Treatment Start": new_df["TreatmentStart"],
-        "Treatment Finish": new_df["TreatmentFinish"],
+        "Diagnosis": new_df["Primary Diagnosis"],
+        "Treatment Place": new_df["Treatment Place"],
+        "Treatment Start": new_df["Treatment Start"],
+        "Treatment Finish": new_df["Treatment Finish"],
         "Date": new_df["Date"],
         "Tahun": new_df["Date"].dt.year,
         "Bulan": new_df["Date"].dt.month,
         "Sum of Billed": new_df["Billed"],
         "Sum of Accepted": new_df["Accepted"],
-        "Sum of Excess Coy": new_df["ExcessCoy"],
-        "Sum of Excess Emp": new_df["ExcessEmp"],
-        "Sum of Excess Total": new_df["ExcessTotal"],
+        "Sum of Excess Coy": new_df["Excess Coy"],
+        "Sum of Excess Emp": new_df["Excess Emp"],
+        "Sum of Excess Total": new_df["Excess Total"],
         "Sum of Unpaid": new_df["Unpaid"],
     })
     return df_transformed
@@ -75,7 +75,7 @@ def save_to_excel(df, filename):
 st.title("Claim Data Raw to Template")
 
 # File uploader
-uploaded_file = st.file_uploader("Upload your CSV file", type=["csv", "xlsx"])
+uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, encoding='unicode_escape')
     
