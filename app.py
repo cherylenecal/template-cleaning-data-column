@@ -27,7 +27,7 @@ def move_to_template(df):
     # Step 3: Convert date columns to datetime
     date_columns = ["Treatment Start", "Treatment Finish", "Date"]
     for col in date_columns:
-        new_df[col] = pd.to_datetime(new_df[col], format="%d/%m/%Y")
+        new_df[col] = pd.to_datetime(new_df[col], errors='coerce')
         if new_df[col].isnull().any():
             st.warning(f"Invalid date values detected in column '{col}'. Coerced to NaT.")
             
@@ -54,9 +54,9 @@ def move_to_template(df):
         "Area": new_df["Area"],
         "Diagnosis": new_df["Primary Diagnosis"].str.upper(),
         "Treatment Place": new_df["Treatment Place"].str.upper(),
-        "Treatment Start": new_df["Treatment Start"],
-        "Treatment Finish": new_df["Treatment Finish"],
-        "Date": new_df["Date"],
+        "Treatment Start": new_df["Treatment Start"].dt.strftime("%-m/%-d/%Y),
+        "Treatment Finish": new_df["Treatment Finish"].dt.strftime("%-m/%-d/%Y),
+        "Date": new_df["Date"].dt.strftime("%-m/%-d/%Y),
         "Tahun": new_df["Date"].dt.year,
         "Bulan": new_df["Date"].dt.month,
         "Sum of Claim": new_df["Claim Paid Note Amount"],
