@@ -27,10 +27,10 @@ def move_to_template(df):
     # Step 3: Convert date columns to datetime
     date_with_hours_columns = ["Treatment Start", "Treatment Finish"]
     for col in date_with_hours_columns:
-        new_df[col] = pd.to_datetime(new_df[col], format="%m/%d/%Y %H:%M", errors="coerce")
+        new_df[col] = pd.to_datetime(new_df[col], errors="coerce")
         if new_df[col].isnull().any():
             st.warning(f"Invalid date values detected in column '{col}'. Coerced to NaT.")
-    new_df["Date"] = pd.to_datetime(new_df["Date"], format="%m/%d/%Y", errors="coerce")
+    new_df["Date"] = pd.to_datetime(new_df["Date"], format="%d/%m/%Y", errors="coerce")
     
             
     # Ubah nilai kosong atau hanya berisi spasi menjadi NaN
