@@ -27,7 +27,7 @@ def move_to_template(df):
     # Step 3: Convert date columns to datetime
     date_columns = ["Treatment Start", "Treatment Finish"]
     for col in date_columns:
-        new_df[col] = pd.to_datetime(new_df[col], format="%m/%d/%Y %I:%M %p")
+        new_df[col] = pd.to_datetime(new_df[col], format='mixed')
         if new_df[col].isnull().any():
             st.warning(f"Invalid date values detected in column '{col}'")    
     new_df["Date"] = pd.to_datetime(new_df["Date"], format="%d/%m/%Y", dayfirst=True)
