@@ -25,45 +25,43 @@ def move_to_template(df):
     new_df = keep_last_duplicate(new_df)
 
     # Step 3: Convert date columns to datetime
-    date_columns = ["TreatmentStart", "TreatmentFinish"]
+    date_columns = ["TreatmentStart", "TreatmentFinish", "Date"]
     for col in date_columns:
-        new_df[col] = pd.to_datetime(new_df[col], format='mixed')
+        new_df[col] = pd.to_datetime(new_df[col], errors='coerce')
         if new_df[col].isnull().any():
-            st.warning(f"Invalid date values detected in column '{col}'")    
-    new_df["Date"] = pd.to_datetime(new_df["Date"], format="%d/%m/%Y", dayfirst=True)
-    
+            st.warning(f"Invalid date values detected in column '{col}'. Coerced to NaT.")
+
     # Step 4: Transform to the new template
     df_transformed = pd.DataFrame({
         "No": range(1, len(new_df) + 1),
-        "PolicyNo": new_df["PolicyNo"],
-        "ClientName": new_df["ClientName"].str.upper(),
-        "ClaimNo": new_df["ClaimNo"],
-        "MemberNo": new_df["MemberNo"],
-        "EmpID": new_df["EmpID"],
-        "EmpName": new_df["EmpName"],
-        "PatientName": new_df["PatientName"].str.upper(),
+        "Policy No": new_df["PolicyNo"],
+        "Client Name": new_df["ClientName"],
+        "Claim No": new_df["ClaimNo"],
+        "Member No": new_df["MemberNo"],
+        "Emp ID": new_df["EmpID"],
+        "Emp Name": new_df["EmpName"],
+        "Patient Name": new_df["PatientName"],
         "Membership": new_df["Membership"],
-        "ProductType": new_df["ProductType"],
-        "ClaimType": new_df["ClaimType"],
-        "RoomOption": new_df['RoomOption'].str.replace(" ", "", regex=True).str.upper(),
+        "Product Type": new_df["ProductType"],
+        "Claim Type": new_df["ClaimType"],
+        "Room Option": new_df["RoomOption"],
         "Area": new_df["Area"],
         "Diagnosis": new_df["PrimaryDiagnosis"],
         "Primary Diagnosis": new_df["PrimaryDiagnosis"],
         "Secondary Diagnosis": new_df["SecondaryDiagnosis"],
         "Plan": new_df["PPlan"],
         "Classification": new_df["Classification"],
-        "Treatment Place": new_df["TreatmentPlace"].str.upper(),
+        "Treatment Place": new_df["TreatmentPlace"],
         "Treatment Start": new_df["TreatmentStart"],
         "Treatment Finish": new_df["TreatmentFinish"],
         "Date": new_df["Date"],
         "Tahun": new_df["Date"].dt.year,
         "Bulan": new_df["Date"].dt.month,
-        "Sum of Claim": new_df["ClaimPaidNoteAmount"],
         "Sum of Billed": new_df["Billed"],
         "Sum of Accepted": new_df["Accepted"],
-        "Sum of Excess Coy": new_df["Excess Coy"],
-        "Sum of Excess Emp": new_df["Excess Emp"],
-        "Sum of Excess Total": new_df["Excess Total"],
+        "Sum of Excess Coy": new_df["ExcessCoy"],
+        "Sum of Excess Emp": new_df["ExcessEmp"],
+        "Sum of Excess Total": new_df["ExcessTotal"],
         "Sum of Unpaid": new_df["Unpaid"],
     })
     return df_transformed
@@ -82,12 +80,12 @@ st.title("Claim Data Raw to Template")
 
 # File uploader
 uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file, encoding='unicode_escape')
+if uploaded_file:
+    raw_data = pd.read_csv(uploaded_file)
     
     # Process data
     st.write("Processing data...")
-    transformed_data = move_to_template(df)
+    transformed_data = move_to_template(raw_data)
     
     # Show a preview of the transformed data
     st.write("Transformed Data Preview:")
