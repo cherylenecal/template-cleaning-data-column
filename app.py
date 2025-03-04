@@ -57,7 +57,7 @@ def move_to_template(df):
         "Primary Diagnosis": new_df["Primary Diagnosis"],
         "Secondary Diagnosis": new_df["Secondary Diagnosis"],
         "Plan": new_df["PPlan"],
-        "Classification": new_df["Classification"]
+        "Classification": new_df["Classification"],
         "Treatment Place": new_df["Treatment Place"].str.upper(),
         "Treatment Start": new_df["Treatment Start"],
         "Treatment Finish": new_df["Treatment Finish"],
