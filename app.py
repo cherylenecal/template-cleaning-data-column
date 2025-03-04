@@ -4,16 +4,16 @@ from io import BytesIO
 
 # Function to filter data
 def filter_data(df):
-    df = df[df['Claim Status'] == 'R']
+    df = df[df['ClaimStatus'] == 'R']
     return df
 
 # Function to handle duplicates
 def keep_last_duplicate(df):
-    duplicate_claims = df[df.duplicated(subset='Claim No', keep=False)]
+    duplicate_claims = df[df.duplicated(subset='ClaimNo', keep=False)]
     if not duplicate_claims.empty:
         st.write("Duplicated ClaimNo values:")
-        st.write(duplicate_claims[['Claim No']].drop_duplicates())
-    df = df.drop_duplicates(subset='Claim No', keep='last')
+        st.write(duplicate_claims[['ClaimNo']].drop_duplicates())
+    df = df.drop_duplicates(subset='ClaimNo', keep='last')
     return df
 
 # Main processing function
@@ -25,46 +25,40 @@ def move_to_template(df):
     new_df = keep_last_duplicate(new_df)
 
     # Step 3: Convert date columns to datetime
-    date_columns = ["Treatment Start", "Treatment Finish"]
+    date_columns = ["TreatmentStart", "TreatmentFinish"]
     for col in date_columns:
         new_df[col] = pd.to_datetime(new_df[col], format='mixed')
         if new_df[col].isnull().any():
             st.warning(f"Invalid date values detected in column '{col}'")    
     new_df["Date"] = pd.to_datetime(new_df["Date"], format="%d/%m/%Y", dayfirst=True)
-            
-    # Ubah nilai kosong atau hanya berisi spasi menjadi NaN
-    new_df['Room Option'] = new_df['Room Option'].replace(["", " "], None)
-    
-    # Gantilah NaN dengan "Unknown" **hanya jika Product Type adalah "IP"**
-    new_df.loc[((new_df["Product Type"] == "IP") | (new_df["Product Type"] == "MA")) & (new_df["Room Option"].isna()), "Room Option"] = "Unknown"
     
     # Step 4: Transform to the new template
     df_transformed = pd.DataFrame({
         "No": range(1, len(new_df) + 1),
-        "Policy No": new_df["Policy No"],
-        "Client Name": new_df["Client Name"].str.upper(),
-        "Claim No": new_df["Claim No"],
-        "Member No": new_df["Member No"],
-        "Emp ID": new_df["Emp ID"],
-        "Emp Name": new_df["Emp Name"],
-        "Patient Name": new_df["Patient Name"].str.upper(),
+        "PolicyNo": new_df["PolicyNo"],
+        "ClientName": new_df["ClientName"].str.upper(),
+        "ClaimNo": new_df["ClaimNo"],
+        "MemberNo": new_df["MemberNo"],
+        "EmpID": new_df["EmpID"],
+        "EmpName": new_df["EmpName"],
+        "PatientName": new_df["PatientName"].str.upper(),
         "Membership": new_df["Membership"],
-        "Product Type": new_df["Product Type"],
-        "Claim Type": new_df["Claim Type"],
-        "Room Option": new_df['Room Option'].str.replace(" ", "", regex=True).str.upper(),
+        "ProductType": new_df["ProductType"],
+        "ClaimType": new_df["ClaimType"],
+        "RoomOption": new_df['RoomOption'].str.replace(" ", "", regex=True).str.upper(),
         "Area": new_df["Area"],
-        "Diagnosis": new_df["Primary Diagnosis"],
-        "Primary Diagnosis": new_df["Primary Diagnosis"],
-        "Secondary Diagnosis": new_df["Secondary Diagnosis"],
+        "Diagnosis": new_df["PrimaryDiagnosis"],
+        "Primary Diagnosis": new_df["PrimaryDiagnosis"],
+        "Secondary Diagnosis": new_df["SecondaryDiagnosis"],
         "Plan": new_df["PPlan"],
         "Classification": new_df["Classification"],
-        "Treatment Place": new_df["Treatment Place"].str.upper(),
-        "Treatment Start": new_df["Treatment Start"],
-        "Treatment Finish": new_df["Treatment Finish"],
+        "Treatment Place": new_df["TreatmentPlace"].str.upper(),
+        "Treatment Start": new_df["TreatmentStart"],
+        "Treatment Finish": new_df["TreatmentFinish"],
         "Date": new_df["Date"],
         "Tahun": new_df["Date"].dt.year,
         "Bulan": new_df["Date"].dt.month,
-        "Sum of Claim": new_df["Claim Paid Note Amount"],
+        "Sum of Claim": new_df["ClaimPaidNoteAmount"],
         "Sum of Billed": new_df["Billed"],
         "Sum of Accepted": new_df["Accepted"],
         "Sum of Excess Coy": new_df["Excess Coy"],
