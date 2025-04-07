@@ -40,7 +40,7 @@ def move_to_template(df):
         "Note No Excess Emp": new_df["NoteNoExcessEmp"],
         "Note No Excess Coy": new_df["NoteNoExcessCoy"],
         "Claim No": new_df["ClaimNo"],
-        "PPlan": new_df["Pplan"],
+        "PPlan": new_df["PPlan"],
         "Classification": new_df["Classification"],
         "Member No": new_df["MemberNo"],
         "Emp ID": new_df["EmpID"],
