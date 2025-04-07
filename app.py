@@ -36,7 +36,12 @@ def move_to_template(df):
         "No": range(1, len(new_df) + 1),
         "Policy No": new_df["PolicyNo"],
         "Client Name": new_df["ClientName"],
+        "Note No": new_df["Note No"],
+        "Note No Excess Emp": new_df["Note No Excess Emp"],
+        "Note No Excess Coy": new_df["Note No Excess Coy"],
         "Claim No": new_df["ClaimNo"],
+        "PPlan": new_df["Pplan"],
+        "Classification": new_df["Classification"],
         "Member No": new_df["MemberNo"],
         "Emp ID": new_df["EmpID"],
         "Emp Name": new_df["EmpName"],
@@ -49,9 +54,8 @@ def move_to_template(df):
         "Diagnosis": new_df["PrimaryDiagnosis"],
         "Primary Diagnosis": new_df["PrimaryDiagnosis"],
         "Secondary Diagnosis": new_df["SecondaryDiagnosis"],
-        "Plan": new_df["PPlan"],
-        "Classification": new_df["Classification"],
         "Treatment Place": new_df["TreatmentPlace"],
+        "Remarks": new_df["Remarks"],
         "Treatment Start": new_df["TreatmentStart"],
         "Treatment Finish": new_df["TreatmentFinish"],
         "Date": new_df["Date"],
@@ -62,7 +66,7 @@ def move_to_template(df):
         "Sum of Excess Coy": new_df["ExcessCoy"],
         "Sum of Excess Emp": new_df["ExcessEmp"],
         "Sum of Excess Total": new_df["ExcessTotal"],
-        "Sum of Unpaid": new_df["Unpaid"],
+        "Sum of Unpaid": new_df["Unpaid"]
     })
     return df_transformed
 
