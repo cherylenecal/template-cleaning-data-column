@@ -32,10 +32,10 @@ def move_to_template(df):
             st.warning(f"Invalid date values detected in column '{col}'. Coerced to NaT.")
 
     # Step 4: Standardize (uppercase etc)
-    upper_columns = ["Room Option", "Treatment Place", "Diagnosis"]
+    upper_columns = ["RoomOption", "TreatmentPlace", "PrimaryDiagnosis"]
     for col in upper_columns:
         new_df[col] = new_df[col].str.upper()
-    new_df.loc[new_df["Room Option"] == "ON PLAN", "Room Option"] = "ONPLAN"
+    new_df.loc[new_df["RoomOption"] == "ON PLAN", "Room Option"] = "ONPLAN"
 
     # Step 5: Transform to the new template
     df_transformed = pd.DataFrame({
@@ -55,8 +55,6 @@ def move_to_template(df):
         "Area": new_df["Area"],
         "Plan": new_df["PPlan"],
         "Diagnosis": new_df["PrimaryDiagnosis"],
-        "Primary Diagnosis": new_df["PrimaryDiagnosis"],
-        "Secondary Diagnosis": new_df["SecondaryDiagnosis"],
         "Treatment Place": new_df["TreatmentPlace"],
         "Treatment Start": new_df["TreatmentStart"],
         "Treatment Finish": new_df["TreatmentFinish"],
