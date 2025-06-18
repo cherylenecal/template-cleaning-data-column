@@ -37,8 +37,6 @@ def move_to_template(df):
         "Policy No": new_df["PolicyNo"],
         "Client Name": new_df["ClientName"],
         "Note No": new_df["NoteNo"],
-        "Note No Excess Emp": new_df["NoteNoExcessEmp"],
-        "Note No Excess Coy": new_df["NoteNoExcessCoy"],
         "Claim No": new_df["ClaimNo"],
         "Member No": new_df["MemberNo"],
         "Emp ID": new_df["EmpID"],
