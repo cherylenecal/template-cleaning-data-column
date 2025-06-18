@@ -59,7 +59,7 @@ def move_to_template(df):
         "Settled Date": new_df["Date"],
         "Year": new_df["Date"].dt.year,
         "Month": new_df["Date"].dt.month,
-        "Length of Stay": new_df["LOS"]
+        "Length of Stay": new_df["LOS"],
         "Sum of Billed": new_df["Billed"],
         "Sum of Accepted": new_df["Accepted"],
         "Sum of Excess Coy": new_df["ExcessCoy"],
