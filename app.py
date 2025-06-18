@@ -38,6 +38,9 @@ def move_to_template(df):
     if "RoomOption" in new_df.columns:
         new_df["RoomOption"] = new_df["RoomOption"].astype(str).str.strip().str.upper()
         new_df.loc[new_df["RoomOption"] == "ON PLAN", "RoomOption"] = "ONPLAN"
+    new_df["RoomOption"] = new_df["RoomOption"].replace(
+        to_replace=["NAN", "NONE", "NaN", "nan", ""], value=""
+    )
 
     # Step 5: Transform to the new template
     df_transformed = pd.DataFrame({
