@@ -34,7 +34,7 @@ def move_to_template(df):
     # Step 4: Standardize (uppercase etc)
     upper_columns = ["RoomOption", "TreatmentPlace", "PrimaryDiagnosis"]
     for col in upper_columns:
-        new_df[col] = new_df[col].str.upper()
+        new_df[col] = new_df[col].astype(str).str.upper()
     if "RoomOption" in new_df.columns:
         new_df["RoomOption"] = new_df["RoomOption"].astype(str).str.strip().str.upper()
         new_df.loc[new_df["RoomOption"] == "ON PLAN", "RoomOption"] = "ONPLAN"
