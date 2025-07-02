@@ -62,7 +62,7 @@ def move_to_template(df):
         "Classification": new_df["Classification"],
         "Diagnosis": new_df["PrimaryDiagnosis"],
         "Primary Diagnosis": new_df["PrimaryDiagnosis"],
-        "Secondary Diagnosis": new_df["SecondaryDiagnosis],
+        "Secondary Diagnosis": new_df["SecondaryDiagnosis"],
         "Treatment Place": new_df["TreatmentPlace"],
         "Treatment Start": new_df["TreatmentStart"],
         "Year": new_df["TreatmentStart"].dt.year,
