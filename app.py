@@ -48,6 +48,9 @@ def move_to_template(df):
         "Policy No": new_df["PolicyNo"],
         "Client Name": new_df["ClientName"],
         "Claim No": new_df["ClaimNo"],
+        "Note No": new_df["NoteNo"],
+        "Note No Excess Emp": new_df["NoteNoExcessEmp"],
+        "Note No Excess Coy": new_df["NoteNoExcessCoy"],
         "Member No": new_df["MemberNo"],
         "Emp ID": new_df["EmpID"],
         "Emp Name": new_df["EmpName"],
@@ -57,7 +60,7 @@ def move_to_template(df):
         "Claim Type": new_df["ClaimType"],
         "Room Option": new_df["RoomOption"],
         "Area": new_df["Area"],
-        "Plan": new_df["PPlan"],
+        "PPlan": new_df["PPlan"],
         "Classification": new_df["Classification"],
         "Diagnosis": new_df["PrimaryDiagnosis"],
         "Primary Diagnosis": new_df["PrimaryDiagnosis"],
@@ -73,7 +76,8 @@ def move_to_template(df):
         "Sum of Excess Coy": new_df["ExcessCoy"],
         "Sum of Excess Emp": new_df["ExcessEmp"],
         "Sum of Excess Total": new_df["ExcessTotal"],
-        "Sum of Unpaid": new_df["Unpaid"]
+        "Sum of Unpaid": new_df["Unpaid"],
+        "Remarks": new_df["Remarks"]
     })
     return df_transformed
 
@@ -128,3 +132,4 @@ if uploaded_file:
             file_name=final_filename,
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
