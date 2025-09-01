@@ -77,7 +77,7 @@ def move_to_template(df):
         "Sum of Excess Emp": new_df["ExcessEmp"],
         "Sum of Excess Total": new_df["ExcessTotal"],
         "Sum of Unpaid": new_df["Unpaid"],
-        "Remarks": new_df["Remarks"]
+        "Remarks": new_df["remarks"]
     })
     return df_transformed
 
@@ -132,4 +132,5 @@ if uploaded_file:
             file_name=final_filename,
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
