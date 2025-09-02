@@ -62,6 +62,7 @@ def move_to_template(df):
         "Area": new_df["Area"],
         "PPlan": new_df["PPlan"],
         "Classification": new_df["Classification"],
+        "Age": new_df["Age"],
         "Diagnosis": new_df["PrimaryDiagnosis"],
         "Primary Diagnosis": new_df["PrimaryDiagnosis"],
         "Secondary Diagnosis": new_df["SecondaryDiagnosis"],
@@ -132,5 +133,6 @@ if uploaded_file:
             file_name=final_filename,
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
