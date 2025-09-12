@@ -27,7 +27,7 @@ def move_to_template(df):
     # Step 3: Convert date columns to datetime
     date_columns = ["TreatmentStart", "TreatmentFinish", "Date"]
     for col in date_columns:
-        new_df[col] = pd.to_datetime(new_df[col], errors='coerce')
+        new_df[col] = pd.to_datetime(new_df[col])
         if new_df[col].isnull().any():
             st.warning(f"Invalid date values detected in column '{col}'. Coerced to NaT.")
 
@@ -133,6 +133,7 @@ if uploaded_file:
             file_name=final_filename,
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 
