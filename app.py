@@ -59,6 +59,7 @@ def move_to_template(df):
         "Product Type": new_df["ProductType"],
         "Claim Type": new_df["ClaimType"],
         "Room Option": new_df["RoomOption"],
+        "Lengh of Stay": new_df["LOS"],
         "Area": new_df["Area"],
         "PPlan": new_df["PPlan"],
         "Classification": new_df["Classification"],
@@ -133,6 +134,7 @@ if uploaded_file:
             file_name=final_filename,
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 
